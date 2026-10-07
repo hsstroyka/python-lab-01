@@ -1,0 +1,26 @@
+[project]
+
+name = "toolkit" 
+
+version = "0.1.0"
+
+description = "Консольный набор утилит: калькулятор и конвертер величин"
+
+requires-python = ">=3.10"
+
+dependencies = []
+
+
+[build-system]
+
+requires = ["hatchling"]
+
+build-backend = "hatchling.build"
+
+
+[tool.pytest.ini_options]
+
+pythonpath = ["src"]
+
+
+
