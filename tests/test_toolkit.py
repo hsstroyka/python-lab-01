@@ -55,3 +55,33 @@ def test_convert_bred():
     with pytest.raises(ConverterError, match = "Неизвестная единица"):
         convert(10,"privet", "kg")
 
+from toolkit.__main__ import main
+
+def test_cli_help(monkeypatch, capsys):
+    monkeypatch.setattr("sys.argv", ["toolkit", "--help"])
+    with pytest.raises(SystemExit) as exit_info:
+        main()
+
+    assert exit_info.value.code == 0
+    captured = capsys.readouterr()
+    assert "Консольный набор утилит" in captured.out
+
+def test_cli_calc_error_stderr(monkeypatch, capsys):
+    monkeypatch.setattr("sys.argv", ["toolkit", "calc", "5", "/", "0"])
+    with pytest.raises(SystemExit) as exit_info:
+        main()
+
+    assert exit_info.value.code == 2
+    captured = capsys.readouterr()
+    assert "Ошибка: Деление на ноль" in captured.err
+
+def test_cli_unknown_command(monkeypatch, capsys):
+    monkeypatch.setattr("sys.argv", ["toolkit", "hello"])
+    with pytest.raises(SystemExit) as exit_info:
+        main()
+
+    assert exit_info.value.code == 2
+    captured = capsys.readouterr()
+    assert "Ошибка: Недопустимый символ: hello" in captured.err
+
+

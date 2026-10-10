@@ -7,7 +7,7 @@ from toolkit.errors import ToolkitError
 
 def print_help():
 
-    help_text = """Консольный набор утилит 'toolkit'
+    help_text = """Консольный набор утилит - калькулятор и конвертер величин
 
 Использование:
   python -m toolkit calc "EXPRESSION" - Запуск калькулятора выражений
